@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Para Ayelén ✨</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#040610;color:#fff;font-family:Arial,sans-serif}
+body{background:radial-gradient(circle at 50% 75%,#182745 0,#0b1025 38%,#040610 80%)}
+.stars,.petals{position:fixed;inset:0;pointer-events:none}
+.star{position:absolute;width:2px;height:2px;background:white;border-radius:50%;opacity:.7;animation:twinkle 2.5s infinite alternate}
+@keyframes twinkle{to{opacity:.15;transform:scale(.55)}}
+.screen{position:fixed;inset:0;display:grid;place-items:center;text-align:center;padding:24px;transition:opacity 1s}
+#intro{z-index:10;background:radial-gradient(circle at center,rgba(42,54,95,.30),rgba(4,6,16,.98))}
+.card{max-width:720px}
+h1{font-family:Georgia,serif;font-size:clamp(48px,10vw,88px);margin:0 0 12px;text-shadow:0 0 28px rgba(255,255,255,.18)}
+.sub{font-size:clamp(18px,3.8vw,28px);color:#f6e7f3;line-height:1.5;margin-bottom:28px}
+button{border:1px solid rgba(255,255,255,.42);background:rgba(255,255,255,.09);color:#fff;padding:14px 26px;border-radius:999px;font-size:17px;cursor:pointer;box-shadow:0 10px 35px rgba(0,0,0,.3)}
+#main{opacity:0;z-index:5}
+#main.show{opacity:1}
+.message{position:absolute;top:7%;left:50%;transform:translateX(-50%);width:min(92%,900px);z-index:6;min-height:100px}
+.line{position:absolute;left:0;right:0;opacity:0;transform:translateY(12px) scale(.98);font-size:clamp(20px,4vw,34px);line-height:1.4;color:#fff;text-shadow:0 2px 20px #000;transition:1s}
+.line.show{opacity:1;transform:translateY(0) scale(1)}
+.garden{position:absolute;left:50%;bottom:-2%;transform:translateX(-50%);width:min(980px,100%);height:72%}
+.flower{position:absolute;bottom:0;transform-origin:bottom center;animation:sway 2.7s ease-in-out infinite}
+@keyframes sway{0%{transform:rotate(-4deg)}50%{transform:rotate(3deg)}100%{transform:rotate(-2deg)}}
+.stem{width:5px;height:var(--h);background:linear-gradient(#358851,#174d2b);margin:auto;border-radius:5px;box-shadow:0 0 8px rgba(55,145,82,.2)}
+.bloom{position:absolute;left:50%;top:-35px;transform:translateX(-50%);width:78px;height:78px;animation:breathe 2.8s ease-in-out infinite alternate}
+@keyframes breathe{0%{transform:translateX(-50%) scale(.96)}100%{transform:translateX(-50%) scale(1.10)}}
+.petal{position:absolute;left:30px;top:4px;width:18px;height:37px;border-radius:70% 70% 45% 45%;background:linear-gradient(#ffe96d,#f3b729);transform-origin:50% 35px;box-shadow:0 0 13px rgba(255,205,64,.18)}
+.center{position:absolute;left:27px;top:29px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle,#8a5b20,#5d3511);box-shadow:0 0 9px rgba(255,189,49,.18)}
+.leaf{position:absolute;width:36px;height:16px;background:#2c7a45;border-radius:100% 0 100% 0;transform:rotate(-25deg)}
+.leaf.r{right:-29px;top:45%;transform:scaleX(-1) rotate(-25deg)} .leaf.l{left:-29px;top:62%}
+.fall{position:absolute;width:11px;height:19px;border-radius:70% 70% 50% 50%;background:#f4c43a;opacity:.75;animation:fall linear forwards}
+@keyframes fall{from{transform:translateY(-30px) rotate(0)}to{transform:translateY(110vh) rotate(360deg);opacity:.04}}
+.small{position:absolute;bottom:20px;left:0;right:0;font-size:12px;color:rgba(255,255,255,.38)}
+
+.fireworks{position:fixed;inset:0;pointer-events:none;z-index:4;overflow:hidden}
+.firework{position:absolute;width:8px;height:8px;border-radius:50%;opacity:0}
+.spark{position:absolute;left:0;top:0;width:6px;height:6px;border-radius:50%;transform:translate(-50%,-50%);animation:explode 1.4s ease-out forwards}
+@keyframes explode{
+  0%{transform:translate(-50%,-50%) translate(0,0) scale(.4);opacity:1}
+  75%{opacity:1}
+  100%{transform:translate(-50%,-50%) translate(var(--x),var(--y)) scale(.1);opacity:0}
+}
+.final-line{font-weight:600;font-size:clamp(24px,4.8vw,40px);color:#fff}
+
+
+.shooting-star{position:fixed;width:145px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,1));transform:rotate(-28deg);opacity:0;z-index:3;pointer-events:none;animation:shoot 1.2s linear forwards}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(-28deg)}15%{opacity:1}100%{opacity:0;transform:translate(-280px,180px) rotate(-28deg)}}
+.glow-orb{position:fixed;width:260px;height:260px;border-radius:50%;filter:blur(70px);opacity:.08;pointer-events:none;z-index:1;animation:orb 7s ease-in-out infinite alternate}
+@keyframes orb{to{transform:translate(45px,-25px) scale(1.15)}}
+
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div><div class="glow-orb" style="left:8%;top:18%;background:#8ad7ff"></div><div class="glow-orb" style="right:7%;top:38%;background:#ff9fd2"></div>
+<div class="petals" id="petals"></div><div class="fireworks" id="fireworks"></div>
+
+<section class="screen" id="intro">
+  <div class="card">
+    <h1>Ayelén ✨</h1>
+    <div class="sub">Tengo un pequeño detalle para vos.</div>
+    <button id="start">Tocá para comenzar</button>
+  </div>
+</section>
+
+<section class="screen" id="main">
+  <div class="message"><div class="line" id="l1">Porque hay personas que simplemente hacen los días un poco mejores.</div>
+<div class="line" id="l2">Un pequeño detalle para alguien que se lo merece.</div>
+<div class="line" id="l3">Que nunca te falten motivos para sonreír.</div>
+<div class="line" id="l4">Hay personas que tienen una energía linda, y vos sos una de ellas.</div>
+<div class="line" id="l5">Solo quería dejarte algo bonito por acá.</div>
+<div class="line" id="l6">Espero que esto te saque aunque sea una sonrisa.</div>
+<div class="line" id="l7">No hace falta una fecha especial para tener un lindo gesto.</div>
+<div class="line" id="l8">Para alguien que, sin darse cuenta, hace todo un poco más alegre.</div>
+<div class="line final-line" id="l9">Espero que te haya gustado :)</div></div>
+  <div class="garden" id="garden"></div>
+  <div class="small">🌻</div>
+</section>
+
+<audio id="music" preload="auto" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<150;i++){
+  const s=document.createElement('i');
+  s.className='star';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=(Math.random()*3)+'s';
+  s.style.transform=`scale(${.5+Math.random()*1.4})`;
+  stars.appendChild(s);
+}
+
+const garden=document.getElementById('garden');
+function flower(x,h,d,scale){
+  const f=document.createElement('div');
+  f.className='flower';
+  f.style.left=x+'%';
+  f.style.setProperty('--h',h+'px');
+  f.style.animationDelay=d+'s';
+  f.style.scale=scale;
+
+  const b=document.createElement('div');
+  b.className='bloom';
+  for(let i=0;i<12;i++){
+    const p=document.createElement('i');
+    p.className='petal';
+    p.style.transform=`rotate(${i*30}deg) translateY(-17px)`;
+    b.appendChild(p);
+  }
+  const c=document.createElement('i');
+  c.className='center';
+  b.appendChild(c);
+  f.innerHTML='<div class="stem"><i class="leaf l"></i><i class="leaf r"></i></div>';
+  f.appendChild(b);
+  garden.appendChild(f);
+}
+
+[
+ [2,205,.3,.60],[7,260,1.1,.68],[12,315,.5,.75],[17,365,1.4,.84],
+ [22,275,.2,.70],[27,405,1.7,.92],[33,325,.8,.78],[38,445,.4,.96],
+ [44,350,1.2,.82],[50,425,.1,.94],[56,335,1.5,.80],[62,455,.7,.98],
+ [68,345,1.8,.83],[73,400,.3,.91],[78,285,1.0,.72],[83,370,.6,.86],
+ [88,315,1.4,.76],[93,265,.2,.67],[98,210,1.6,.60]
+].forEach(a=>flower(...a));
+
+function fallingPetal(){
+  const p=document.createElement('i');
+  p.className='fall';
+  p.style.left=Math.random()*100+'%';
+  p.style.top='-25px';
+  p.style.animationDuration=(6+Math.random()*6)+'s';
+  document.getElementById('petals').appendChild(p);
+  setTimeout(()=>p.remove(),12000);
+}
+
+const lines=[...document.querySelectorAll('.line')];
+function burst(x,y,color,size=1){
+  const root=document.getElementById('fireworks');
+  const holder=document.createElement('div');
+  holder.style.position='absolute';
+  holder.style.left=x+'%';
+  holder.style.top=y+'%';
+  root.appendChild(holder);
+
+  const count=Math.round(26*size);
+  for(let i=0;i<count;i++){
+    const s=document.createElement('span');
+    s.className='spark';
+    const a=(Math.PI*2/count)*i + Math.random()*0.08;
+    const d=(55+Math.random()*65)*size;
+    s.style.background=color;
+    s.style.boxShadow='0 0 12px '+color+', 0 0 22px '+color;
+    s.style.setProperty('--x',(Math.cos(a)*d)+'px');
+    s.style.setProperty('--y',(Math.sin(a)*d)+'px');
+    holder.appendChild(s);
+  }
+  setTimeout(()=>holder.remove(),1800);
+}
+
+const fireworkColors=[
+  '#8ad7ff', '#ff9fd2', '#c7a0ff', '#ffffff',
+  '#72f1b8', '#ff8fab', '#9bf6ff', '#d0a2ff', '#ffffff'
+];
+
+function phraseFireworks(i){
+  const palettes=[
+    ['#8ad7ff','#ffffff','#c7a0ff','#ff9fd2'],
+    ['#ff9fd2','#ffffff','#9bf6ff','#72f1b8'],
+    ['#72f1b8','#8ad7ff','#ffffff','#c7a0ff'],
+    ['#c7a0ff','#ff9fd2','#ffffff','#9bf6ff'],
+    ['#9bf6ff','#72f1b8','#ffffff','#ff8fab'],
+    ['#ff8fab','#c7a0ff','#ffffff','#8ad7ff'],
+    ['#8ad7ff','#ff9fd2','#ffffff','#72f1b8'],
+    ['#72f1b8','#c7a0ff','#ffffff','#ff9fd2'],
+    ['#ffffff','#8ad7ff','#ff9fd2','#c7a0ff']
+  ];
+  const palette=palettes[i%palettes.length];
+  const positions=[
+    [9,22],[22,34],[34,16],[47,30],[60,14],[73,34],[88,22],
+    [16,46],[40,43],[63,45],[83,47],[51,18]
+  ];
+  positions.forEach((pos,j)=>{
+    setTimeout(()=>{
+      burst(
+        pos[0]+(Math.random()*4-2),
+        pos[1]+(Math.random()*4-2),
+        palette[j%palette.length],
+        1.05+Math.random()*.32
+      );
+    },j*260);
+  });
+  setTimeout(()=>{
+    burst(25,24,palette[1],1.45);
+    burst(50,16,palette[2],1.55);
+    burst(75,25,palette[3],1.45);
+  },3200);
+}
+
+function finalFireworks(){
+  const shots=[
+    [10,27,'#8ad7ff',1.45],[28,17,'#ff9fd2',1.55],
+    [50,24,'#ffffff',1.7],[72,17,'#c7a0ff',1.55],
+    [90,29,'#72f1b8',1.45]
+  ];
+  shots.forEach((s,i)=>setTimeout(()=>burst(...s),i*380));
+  setTimeout(()=>{
+    burst(22,20,'#ffffff',1.15);
+    burst(50,15,'#9bf6ff',1.25);
+    burst(78,20,'#ff8fab',1.15);
+  },2400);
+  setTimeout(()=>{
+    burst(30,31,'#c7a0ff',1.1);
+    burst(50,20,'#ffffff',1.35);
+    burst(70,31,'#8ad7ff',1.1);
+  },4300);
+}
+
+function showLines(){
+  const interval=5200;
+  lines.forEach((line,i)=>{
+    setTimeout(()=>{
+      lines.forEach(x=>x.classList.remove('show'));
+      line.classList.add('show');
+      phraseFireworks(i);
+      if(i===lines.length-1){
+        setTimeout(finalFireworks,800);
+      }
+    },900+i*interval);
+  });
+}
+
+
+function shootingStar(){
+  const s=document.createElement('i');
+  s.className='shooting-star';
+  s.style.left=(45+Math.random()*55)+'%';
+  s.style.top=(5+Math.random()*35)+'%';
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),1400);
+}
+
+document.getElementById('start').addEventListener('click',()=>{
+  const intro=document.getElementById('intro');
+  intro.style.opacity=0;
+  setTimeout(()=>intro.remove(),950);
+  document.getElementById('main').classList.add('show');
+  document.getElementById('music').play().catch(()=>{});
+  showLines();
+  setInterval(fallingPetal,470); setInterval(shootingStar,2500); setInterval(()=>{shootingStar();setTimeout(shootingStar,420)},7200);
+});
+</script>
+</body>
+</html>
